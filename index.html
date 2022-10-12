@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segunda Entrega</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <h1>My Todo</h1>
+
+    <section id="user-profile">
+        <div id="info-card">
+            <span class="user-name"><strong>Name:</strong> John</span>
+            <span class="user-favorite-color"><strong>Favorite Color:</strong> Green</span>
+        </div>
+        <span class="user-start-date"><strong>Start Year:</strong> 2020</span>
+    </section><!-- /user-profile -->
+
+    <section id="add-items">
+        <h2>Add Item</h2>
+        <div class="form-group item-add">
+            <input class="item-add-input" type="text">
+            <a class="item-add" href="#">Add</a>
+        </div>
+    </section> <!-- /add-items -->
+
+    <section id="todo-priority">
+        <h2>Todo List</h2>
+
+        <article class="todo-list-single">
+            <div class="radio-group item-priority">
+                <div class="form-group">
+                    <input type="radio" id="radio-low-priority" name="priority-radio-group-1" value="0">
+                    <label>Low Priority</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" id="radio-medium-priority" name="priority-radio-group-1" value="50">
+                    <label>Medium Priority</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" id="radio-high-priority" name="priority-radio-group-1" value="100">
+                    <label>High Priority</label>
+                </div>
+            </div><!-- / item-priority -->
+            <div class="form-group item-check">
+                <input class="item-check-input" type="checkbox">
+                <input class="item-add-input" type="text" value="Pay Bills">
+            </div>
+            <div class="form-group item-controls">
+                <a class="item-edit" href="#">Edit</a>
+                <a class="item-delete" href="#">Delete</a>
+            </div>
+
+            <div class="form-group-wrapper item-timelapse">
+                <label for="fromTime">From: </label>
+                <input class="fromTime" type="time" name="fromTime" value="13:30">
+                <label for="toTime">To: </label>
+                <input class="toTime" type="time" name="toTime" value="14:30">
+                <button id="convert2" class="btn">Enter</button>
+                <div class="sum">00:00</div>
+                <button class="reset">Reset</button>
+            </div>
+        </article>
+
+        <article class="todo-list-single">
+            <div class="radio-group item-priority">
+                <div class="form-group">
+                    <input type="radio" id="radio-low-priority" name="priority-radio-group-2" value="0">
+                    <label>Low Priority</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" id="radio-medium-priority" name="priority-radio-group-2" value="50">
+                    <label>Medium Priority</label>
+                </div>
+                <div class="form-group">
+                    <input type="radio" id="radio-high-priority" name="priority-radio-group-2" value="100">
+                    <label>High Priority</label>
+                </div>
+            </div><!-- / item-priority -->
+            <div class="form-group item-check">
+                <input class="item-check-input" type="checkbox">
+                <input class="item-add-input" type="text" value="Pay Bills">
+            </div>
+            <div class="form-group item-controls">
+                <a class="item-edit" href="#">Edit</a>
+                <a class="item-delete" href="#">Delete</a>
+            </div>
+
+            <div class="form-group-wrapper item-timelapse">
+                <label for="fromTime">From: </label>
+                <input class="fromTime" type="time" name="fromTime" value="13:30">
+                <label for="toTime">To: </label>
+                <input class="toTime" type="time" name="toTime" value="14:30">
+                <button id="convert1" class="btn">Enter</button>
+                <div class="sum">00:00</div>
+                <button class="reset">Reset</button>
+            </div>
+        </article>
+
+    </section> <!-- /todo-priority -->
+
+    <section id="todo-completed">
+        <h2>Completed</h2>
+
+        <article class="todo-completed-single">
+            <div class="form-group item-check">
+                <input class="item-add-check" type="checkbox">
+                <input class="item-add-input" type="text" value="Pay Bills">
+            </div>
+            <div class="form-group item-controls">
+                <a class="item-edit" href="#">Edit</a>
+                <a class="item-delete" href="#">Delete</a>
+            </div>
+        </article>
+
+    </section><!-- /todo-completed -->
+
+    <script src="./assets/js/main.js"></script> 
+
+</body>
+</html>

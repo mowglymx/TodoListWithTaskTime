@@ -1,0 +1,8 @@
+.todo-list-single{
+    margin: 0 0 15px;
+    display: block;
+    border: 1px solid #444;
+}
+.radio-group.item-priority .form-group{
+    display: inline-block;
+}
