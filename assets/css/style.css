@@ -1,3 +1,29 @@
+/*
+    COLOR PALETTE:
+
+    Naranja: #FC440F
+    Rosa mexicano: #F62DAE
+    Gris ligero: #DDDDDD
+    Gris oscuro: #4B5267
+    Casi blanco: #EFEFEF
+
+*/
+
+body #user-preferences, body.happy #user-preferences{
+    padding: 10px;
+    background-color: #fc440f4d;
+ }
+body.sad #user-preferences{
+    background-color: #F62DAE21;
+}
+body.neutral #user-preferences{
+   background-color: #FC440F21;
+}
+
+
+#user-data{
+    align-items: center;
+}
 .todo-list-single{
     margin: 0 0 15px;
     display: block;
@@ -5,4 +31,10 @@
 }
 .radio-group.item-priority .form-group{
     display: inline-block;
+}
+#infoNombre{
+    padding:0 3px;
+}
+.user-start-date{
+    font-size: 13px;
 }
