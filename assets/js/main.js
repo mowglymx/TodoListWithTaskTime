@@ -316,26 +316,25 @@ if( typeof window === 'object' ){
     
             // Recorremos el LocalStorage con un for in
             for( let i in localStorage ){
-                // console.log('Salida de localStorage--->', i)
+                let key = localStorage.key(i);
 
                 if( typeof localStorage[i] == 'string'){
                     let taskSingle = document.createElement('article');
-                    let counter = 0;
-                    uniqueTaskID = Date.now() + counter++;
-                    taskSingle.classList.add('task-single' + 'task-single-' + uniqueTaskID);
+                    taskSingle.classList.add('task-single');
                     taskSingle.innerHTML = `
                         <div class="item-priority">
-                            <input type="radio" class="btn-check" name="priority-radio-group-${uniqueTaskID} radio-low-priority" autocomplete="off" value="0">
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-low-priority" autocomplete="off" value="0">
                             <label class="btn btn-secondary" for="radio-low-priority">Low Priority</label>
                             
-                            <input type="radio" class="btn-check" name="priority-radio-group-${uniqueTaskID} radio-medium-priority" autocomplete="off" value="50">
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-medium-priority" autocomplete="off" value="50">
                             <label class="btn btn-secondary" for="radio-medium-priority">Medium Priority</label>
 
-                            <input type="radio" class="btn-check" name="priority-radio-group-${uniqueTaskID} radio-high-priority" autocomplete="off" value="100">
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-high-priority" autocomplete="off" value="100">
                             <label class="btn btn-secondary" for="radio-high-priority">High Priority</label>
                         </div>
                         <div class="task-single-name">
-                            ${localStorage[i]} <i class="fa-solid fa-trash-can"></i>
+                            <input class="item-add-input" type="text" value="${localStorage[i]}">
+                            <i class="fa-solid fa-trash-can"></i>
                         </div>
                     `
                     taskList.append(taskSingle);
