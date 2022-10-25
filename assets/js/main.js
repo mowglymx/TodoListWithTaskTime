@@ -1,35 +1,22 @@
-/**********************************************************
-01 SINTAXIS Y VARIABLES 
-**********************************************************/
-
-//console.log('SINTAXIS Y VARIABLES ------->');
-    
-    // let userName = prompt(`What's your name?`);
-    // let userFavoriteColor = prompt(`What's your favorite color?`);
-
-    // console.log(`User name: ${userName} & User favorite color: ${userFavoriteColor}`);
-
-
-
 
 if( typeof window === 'object' ){
 
-    // DOM IS LOADED: DOMContentLoaded
+    /// DOM IS LOADED: DOMContentLoaded
 	window.addEventListener('DOMContentLoaded', function(){
 
 		console.log('EL DOM SE CARGO')
 
         /// USER FORM ////////////////////////////////////////////
 
-            // Seleccionamos el formulario
+            /// Seleccionamos el formulario
             let formulario = document.querySelector('#user-data-form')
             
-            // Declare the Name
+            /// Declare the Name
             let nameReady = document.querySelector('#name-ready')
-            // Hide the Name
+            /// Hide the Name
             nameReady.style.display = 'none'
 
-            // Hide Name input when name is declared
+            /// Hide Name input when name is declared
             let editName = document.querySelector('#edit-name')
 
             editName.addEventListener('click', (e) =>{
@@ -37,7 +24,7 @@ if( typeof window === 'object' ){
                 nameReady.style.display = 'none'
             })
 
-            // Input de error
+            /// Input de error
             let error_nombre = document.querySelector('#error_nombre')
 
             error_nombre.style.display='none'
@@ -51,7 +38,7 @@ if( typeof window === 'object' ){
                 return false;
             }
 
-            // Validamos el campo nombre
+            /// Validamos el campo nombre
             nombre.addEventListener('input', (e)=>{
                 let validaNombre = checkName( e.target.value )
                 console.log(e.target.value)
@@ -64,7 +51,7 @@ if( typeof window === 'object' ){
                 }
             })
 
-            // INICIO DEL ENVIO
+            /// INICIO DEL ENVIO
             formulario.addEventListener('submit', function(e){
 
                 e.preventDefault()
@@ -84,7 +71,7 @@ if( typeof window === 'object' ){
                 }
                 
             })
-            // CIERR DEL ENVIO DEL FORM
+            /// CIERR DEL ENVIO DEL FORM
 
 
 
@@ -188,43 +175,7 @@ if( typeof window === 'object' ){
         04 FUNCIONES
         **********************************************************/
 
-        console.log('FUNCIONES ------->');
-
-            // Calculate time to complete a task
-                var btn = document.querySelector(".btn");
-                var sum = document.querySelector(".sum");
-                var reset = document.querySelector(".reset");
-                btn.onclick = convertTime;
-
-                function getTotalMinutesEachTask() {
-                    const fromTime = document.querySelector('.fromTime').value;
-                    const toTime = document.querySelector('.toTime').value;
-
-                    const [fromHours, fromMinutes] = fromTime.split(':');
-                    const [toHours, toMinutes] = toTime.split(':');
-                    
-                    // Total minutes worked is calculated by getting the difference in hours x 60 and adding the difference in minutes.
-                    return (toHours - fromHours) * 60 + (toMinutes - fromMinutes);
-                }
-
-                function convertTime() {
-                    const totalMinutes = getTotalMinutesEachTask();
-                    if (totalMinutes < 0) {
-                        sum.innerHTML = "The To time should be later than From time"
-                        return;
-                    }
-
-                    sum.innerHTML = "You Worked " + minutesToHoursAndMinutes(totalMinutes)  + " hours";
-                    reset.style.opacity = 1;
-                }
-
-                function minutesToHoursAndMinutes(minutes) {
-                    const hours = Math.floor(minutes / 60);
-                    const mins = (minutes % 60);
-                    return (hours + '').padStart(2, '0') + ':' + (mins + '').padStart(2, '0')
-                }
-
-                reset.onclick = (e)=>sum.innerHTML = "00:00"
+        
 
 
         /**********************************************************
@@ -260,119 +211,184 @@ if( typeof window === 'object' ){
 }
 
 
- /**********************************************************
-08 DOM
-**********************************************************/
 
-    /// MOOD PICKER ////////////////////////////////////////////
+/// MOOD PICKER ////////////////////////////////////////////
 
-    function moodPick() {
-        let moodPickValue = document.querySelector('#mood-select').value;
-        
-            if (body.classList !== "") {
-                console.log(`Mood is ${moodPickValue}`)
-                body.className = '';
-                body.classList.add(moodPickValue)
-            } else {
-                body.classList.add(moodPickValue)
+function moodPick() {
+    let moodPickValue = document.querySelector('#mood-select').value;
+    
+        if (body.classList !== "") {
+            console.log(`Mood is ${moodPickValue}`)
+            body.className = '';
+            body.classList.add(moodPickValue)
+        } else {
+            body.classList.add(moodPickValue)
+        }
+
+        return moodPickValue
+    
+}
+
+
+/// ADD TASKS ////////////////////////////////////////////
+
+if( typeof window === 'object' ){ 
+
+    /// DOM IS LOADED: DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+
+        let addTask = document.querySelector('#form-add-task');
+
+        addTask.addEventListener('submit', ( event ) => {
+            
+            /// Prevent the form to reload
+            event.preventDefault();
+
+            let newTaskName = document.querySelector('#add-task').value;
+    
+            /// Validate if the input is empty
+            if ( newTaskName.length >= 1 ) {
+                /// Add the Task Name to LocalStorage
+                localStorage.setItem( newTaskName, newTaskName);
+                location.reload();
+            }else{
+                alert('You need to write the new task name')
+            }
+        });
+    
+        let taskList = document.querySelector('#task-list');
+
+        taskList.classList.add('list-group', 'list-group-flush');
+
+        /// Go through all the LocalStorage with a for in
+        for( let i in localStorage ){
+            let key = localStorage.key(i);
+
+            if( typeof localStorage[i] == 'string'){
+                let taskSingle = document.createElement('article');
+                taskSingle.classList.add('task-single', 'card', 'mb-3');
+                taskSingle.innerHTML = `
+                    <div class="row card-body">
+                        <div class="col-md-4 task-single-name">
+                            <div class="input-group">
+                                <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
+                                <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 item-priority">
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-low-priority" autocomplete="off" value="0">
+                            <label class="btn btn-sm btn-secondary" for="radio-low-priority">Low Priority</label>
+                            
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-medium-priority" autocomplete="off" value="50">
+                            <label class="btn btn-sm btn-secondary" for="radio-medium-priority">Medium Priority</label>
+
+                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-high-priority" autocomplete="off" value="100">
+                            <label class="btn btn-sm btn-secondary" for="radio-high-priority">High Priority</label>
+                        </div>
+                        <div class="col-sm-4 item-timelapse">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row justify-content-end align-items-end">
+                                        <div class="col-md-3 mx-1 p-0">
+                                            <label for="fromTime">From: </label>
+                                            <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
+                                        </div>
+                                        <div class="col-md-3 mx-1 p-0">
+                                            <label for="toTime">To: </label>
+                                            <input class="form-control toTime" type="time" name="toTime" value="14:30">
+                                        </div>
+                                        <div class="col-md-5 mx-0 p-0">
+                                            <button class="btn btn-secondary item-get-time">Get Total Time</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item-sum-time">00:00</div>
+                                        <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
+                                    </div>
+                                </div>
+                            </div><!-- /card -->
+                        </div>
+                    </div>
+                `
+                taskList.append(taskSingle);
             }
 
-            return moodPickValue
-        
-    }
+        }
+
+        /// Delete Task
+    
+        let removeTask = document.querySelector('.task-single-delete');
+    
+        removeTask.addEventListener('click', ( event ) => {
+
+            console.log('Delete a task is working!')
+            
+            /// Select the input with the name of task, inside the task-single div
+            let newTaskName = document.querySelector('.task-single .item-add-input').value;
+    
+            /// Validate if the input is empty
+            if ( newTaskName.length >= 1 ) {
+                localStorage.removeItem(newTaskName);
+                location.reload();
+            }
+        });
+
+    })
+}
 
 
-    /// ADD TASKS ////////////////////////////////////////////
+/// ADD TASK TIME ////////////////////////////////////////////
 
     if( typeof window === 'object' ){ 
 
-        // INICIO DEL DOMContentLoaded
+        /// DOM IS LOADED: DOMContentLoaded
         window.addEventListener('DOMContentLoaded', () => {
-    
-            let addTask = document.querySelector('#form-add-task');
-    
-            addTask.addEventListener('submit', ( event ) => {
+
+        /// Calculate time to complete a task                
+            var sum = document.querySelector(".item-sum-time");
+            var reset = document.querySelector(".item-reset-time");
+
+            function getTotalMinutesEachTask() {
+                let fromTime = document.querySelector('.fromTime').value;
+                let toTime = document.querySelector('.toTime').value;
+
+                let [fromHours, fromMinutes] = fromTime.split(':');
+                let [toHours, toMinutes] = toTime.split(':');
                 
-                // Prevenir que el formulario se refresque
-                event.preventDefault();
-    
-                // Seleccionamos el ID del input peliculas
-                let newTaskName = document.querySelector('#add-task').value;
-        
-                // Validamos si el input biene vacio
-                if ( newTaskName.length >= 1 ) {
-                    // Ingresamos el Titulo de la pelicula al LocalStorage
-                    localStorage.setItem( newTaskName, newTaskName);
-                    location.reload();
-                }else{
-                    alert('You need to write the new task name')
-                }
-            });
-        
-        
-            let taskList = document.querySelector('#task-list');
-    
-            taskList.classList.add('list-group', 'list-group-flush');
-    
-            // Recorremos el LocalStorage con un for in
-            for( let i in localStorage ){
-                let key = localStorage.key(i);
-
-                if( typeof localStorage[i] == 'string'){
-                    let taskSingle = document.createElement('article');
-                    taskSingle.classList.add('task-single');
-                    taskSingle.innerHTML = `
-                        <div class="item-priority">
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-low-priority" autocomplete="off" value="0">
-                            <label class="btn btn-secondary" for="radio-low-priority">Low Priority</label>
-                            
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-medium-priority" autocomplete="off" value="50">
-                            <label class="btn btn-secondary" for="radio-medium-priority">Medium Priority</label>
-
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-high-priority" autocomplete="off" value="100">
-                            <label class="btn btn-secondary" for="radio-high-priority">High Priority</label>
-                        </div>
-                        <div class="task-single-name">
-                            <input class="item-add-input" type="text" value="${localStorage[i]}">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </div>
-                    `
-                    taskList.append(taskSingle);
-                }
-
+                // Total minutes worked is calculated by getting the difference in hours x 60 and adding the difference in minutes.
+                return (toHours - fromHours) * 60 + (toMinutes - fromMinutes);
             }
-        
-        
-            let removeTask = document.querySelector('#formBorrarPeliculas');
-        
-            removeFormulario.addEventListener('submit', ( event ) => {
-                
-                // Seleccionamos el ID del input peliculas
-                let tituloPelicula = document.querySelector('#removePelicula').value;
-        
-                // Validamos si el input biene vacio
-                if ( tituloPelicula.length >= 1 ) {
-                    // Ingresamos el Titulo de la pelicula al LocalStorage
-                    localStorage.removeItem(tituloPelicula);
-                    location.reload();
-                }
-            });
-    
 
-            // OBJETOS CON LOCAL STORAGE
-            let usuario = {
-                nombre: 'Alejandro Becerra',
-                email: 'abcerraguz@gmail.com',
-                web: 'http:www.abecerrafrontend.cl'
+            function convertTime() {
+                let totalMinutes = getTotalMinutesEachTask();
+
+                if (totalMinutes < 0) {
+                    sum.innerHTML = "The To time should be later than From time"
+                    return;
+                }
+
+                sum.innerHTML = "You Worked " + minutesToHoursAndMinutes(totalMinutes) + " hours";
+                reset.style.opacity = 1;
             }
-    
-            /* 
-                Para guardar objetos en el local Storage, importante para guardar datos estos
-                deben ser convertidos a un string si no el objeto quedaria como
-                Indefinido. Para esto se utiliza la propiedad JSON.stringfy().
-            */
-    
-            localStorage.setItem('usuario',  usuario );
-    
+
+            function minutesToHoursAndMinutes(minutes) {
+                let hours = Math.floor(minutes / 60);
+                let mins = (minutes % 60);
+                return (hours + '').padStart(2, '0') + ':' + (mins + '').padStart(2, '0')
+            }
+
+            document.querySelectorAll('.item-get-time').forEach(getTimeButton => {
+                getTimeButton.addEventListener('click', function (e) {
+                    e.stopPropagation();
+
+                    console.log('Get time button clicked')
+
+                    convertTime();
+                });
+            });              
+
+
+            
+            reset.onclick = (e)=> sum.innerHTML = "00:00"
         })
     }

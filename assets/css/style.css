@@ -38,3 +38,9 @@ body.neutral #user-preferences{
 .user-start-date{
     font-size: 13px;
 }
+.task-single-delete{
+    cursor: pointer;
+}
+.task-single-delete svg{
+    margin-right: 5px;
+}
