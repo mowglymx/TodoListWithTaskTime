@@ -74,15 +74,6 @@ if( typeof window === 'object' ){
             /// CIERR DEL ENVIO DEL FORM
 
 
-
-
-
-
-
-            
-
-
-
         /**********************************************************
         02 CONTROL DE FLUJOS 
         **********************************************************/
@@ -258,57 +249,63 @@ if( typeof window === 'object' ){
     
         let taskList = document.querySelector('#task-list');
 
-        taskList.classList.add('list-group', 'list-group-flush');
-
         /// Go through all the LocalStorage with a for in
         for( let i in localStorage ){
             let key = localStorage.key(i);
 
             if( typeof localStorage[i] == 'string'){
                 let taskSingle = document.createElement('article');
+
                 taskSingle.classList.add('task-single', 'card', 'mb-3');
                 taskSingle.innerHTML = `
-                    <div class="row card-body">
-                        <div class="col-md-4 task-single-name">
-                            <div class="input-group">
-                                <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
-                                <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 item-priority">
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-low-priority" autocomplete="off" value="0">
-                            <label class="btn btn-sm btn-secondary" for="radio-low-priority">Low Priority</label>
-                            
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-medium-priority" autocomplete="off" value="50">
-                            <label class="btn btn-sm btn-secondary" for="radio-medium-priority">Medium Priority</label>
-
-                            <input type="radio" class="btn-check" name="priority-radio-group-${key} radio-high-priority" autocomplete="off" value="100">
-                            <label class="btn btn-sm btn-secondary" for="radio-high-priority">High Priority</label>
-                        </div>
-                        <div class="col-sm-4 item-timelapse">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row justify-content-end align-items-end">
-                                        <div class="col-md-3 mx-1 p-0">
-                                            <label for="fromTime">From: </label>
-                                            <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
-                                        </div>
-                                        <div class="col-md-3 mx-1 p-0">
-                                            <label for="toTime">To: </label>
-                                            <input class="form-control toTime" type="time" name="toTime" value="14:30">
-                                        </div>
-                                        <div class="col-md-5 mx-0 p-0">
-                                            <button class="btn btn-secondary item-get-time">Get Total Time</button>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="item-sum-time">00:00</div>
-                                        <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
-                                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-7 task-single-name">
+                                <div class="input-group">
+                                    <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
+                                    <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
                                 </div>
-                            </div><!-- /card -->
-                        </div>
-                    </div>
+                                <div class="item-priority mt-4">
+                                    <input type="radio" id="radio-low-priority" class="btn-check btn-success" name="priority-radio-group" autocomplete="off" value="0">
+                                    <label class="btn btn-sm btn-success" for="radio-low-priority">Low Priority</label>
+                                    
+                                    <input type="radio" id="radio-medium-priority" class="btn-check btn-warning" name="priority-radio-group" autocomplete="off" value="50">
+                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority">Medium Priority</label>
+
+                                    <input type="radio" id="radio-high-priority" class="btn-check btn-danger" name="priority-radio-group" autocomplete="off" value="100">
+                                    <label class="btn btn-sm btn-danger" for="radio-high-priority">High Priority</label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 item-timelapse">
+                                <div class="card m-0 p-0">
+                                    <div class="card-body m-0 p-2">
+                                        <div class="row align-items-end">
+                                            <div class="col-md-4">
+                                                <label for="fromTime"><small>From:</small></label>
+                                                <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="toTime"><small>To:</small></label>
+                                                <input class="form-control toTime" type="time" name="toTime" value="14:30">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-secondary item-get-time">Get Total Time</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="item-sum-time">00:00</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
+                                            </div>
+                                        </div><!-- /row -->
+                                    </div>
+                                </div><!-- /card -->
+                            </div><!-- /col-md-6 -->
+                        </div><!-- /row -->
+                    </div><!-- /card-body -->
                 `
                 taskList.append(taskSingle);
             }

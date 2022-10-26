@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segunda Entrega</title>
+    <title>Tercera Entrega</title>
 
     <link rel="stylesheet" href="./assets/css/style.css">
     
@@ -68,25 +68,32 @@
 
     </section><!-- /user-preferences /container -->
 
-    <section id="add-items" class="container">
-        <h2>Add Task</h2>
-        
-        <form action="" id="form-add-task">
-            <div class="row align-items-center">
-				<div class="col-sm-3 my-1">
-					<input type="text" class="form-control" id="add-task">
-				</div>
+    <section id="add-items" class="container my-4 p-0">
 
-				<div class="col-sm-3 my-1">
-					<button type="submit" class="btn btn-primary">Add New Task</button>
-				</div>
-			</div>
-        </form>
+        <div class="card bg-light">
+            <div class="card-header">
+                <h3>Add Task</h3>
+            </div>
+            
+            <div class="card-body">
+                <form action="" id="form-add-task">
+                    <div class="row align-items-center">
+                        <div class="col-sm-3 my-1">
+                            <input type="text" class="form-control" id="add-task" placeholder="Write the name of the New task">
+                        </div>
 
-        <div id="task-list">
-        </div>
+                        <div class="col-sm-3 my-1">
+                            <button type="submit" class="btn btn-primary">Add New Task</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
     </section> <!-- /add-items -->
+
+    <div id="task-list" class="container my-4 p-0">
+        <h2>Tasks List</h2>
+    </div>
 
     <section id="todo-completed" class="container">
         <h2>Completed</h2>
