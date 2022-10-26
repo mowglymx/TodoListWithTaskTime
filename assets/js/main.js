@@ -266,14 +266,14 @@ if( typeof window === 'object' ){
                                     <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
                                 </div>
                                 <div class="item-priority mt-4">
-                                    <input type="radio" id="radio-low-priority" class="btn-check btn-success" autocomplete="off" value="0">
-                                    <label class="btn btn-sm btn-success" for="radio-low-priority">Low Priority</label>
+                                    <input type="radio" id="radio-low-priority-${[i]}" class="btn-check btn-success" name="priority-${[i]}" autocomplete="off" value="0">
+                                    <label class="btn btn-sm btn-success" for="radio-low-priority-${[i]}">Low Priority</label>
                                     
-                                    <input type="radio" id="radio-medium-priority" class="btn-check btn-warning" autocomplete="off" value="50">
-                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority">Medium Priority</label>
+                                    <input type="radio" id="radio-medium-priority-${[i]}" class="btn-check btn-warning" name="priority-${[i]}" autocomplete="off" value="50">
+                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority-${[i]}">Medium Priority</label>
 
-                                    <input type="radio" id="radio-high-priority" class="btn-check btn-danger" autocomplete="off" value="100">
-                                    <label class="btn btn-sm btn-danger" for="radio-high-priority">High Priority</label>
+                                    <input type="radio" id="radio-high-priority-${[i]}" class="btn-check btn-danger" name="priority-${[i]}" autocomplete="off" value="100">
+                                    <label class="btn btn-sm btn-danger" for="radio-high-priority-${[i]}">High Priority</label>
                                 </div>
                             </div>
                             <div class="col-md-5 item-timelapse">
@@ -312,50 +312,27 @@ if( typeof window === 'object' ){
 
         }
 
+        
+
         /// Proceso Asincrónico // Async
         /// Add Unique Radio Button Group name
-            function addNameToRadioInputs() {
+            function taskSingleID() {
                 //get the images
                 let singleTaskGet = document.querySelectorAll('.task-single');
 
                 singleTaskGet.forEach(function (singleTaskGet, index) {
 
                     setTimeout( function onTimer(){
-                        console.log(singleTaskGet, index); // The element
 
-                        singleTaskGet.classList.add('task-single-'+index)
-
+                        singleTaskGet.setAttribute('id', 'task-single-'+index)
                         
-
-                        let priorityInputs = document.querySelectorAll('.btn-check')
-
-                        for (i=0; i<priorityInputs.length; i++) {
-
-                            let nameParent = document.querySelector(".item-priority").parentNode;
-
-                            console.log(nameParent,index)
-
-                            priorityInputs[i].setAttribute('name', 'priority-name-'+(nameParent,index));
-
-                            
-                            
-                        }
-
-                        
-
                     },2000)
     
                 });
                 
             }
             
-            addNameToRadioInputs();
-
-
-
-
-
-
+            taskSingleID();
 
 
 
