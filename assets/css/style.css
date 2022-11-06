@@ -50,6 +50,11 @@ body.neutral #user-preferences{
 .task-single.selected .item-priority{
     background-color: #f0f0f0;
 }
+.task-single.joy.selected .item-priority,
+.task-single.fear.selected .item-priority,
+.task-single.sadness.selected .item-priority{
+    background-color: #ffffffcf;
+}
 .btn-check+.btn{
     opacity: .6;
 }
@@ -58,4 +63,12 @@ body.neutral #user-preferences{
 }
 #form-add-task button{
     width: 100%;;
+}
+.task-single.joy{
+    background-color: #3ade9224;
+    border: 1px solid #3ade92;
+}
+.task-single.sadness, .task-single.fear{
+    background-color: #3ac1de24;
+    border: 1px solid #3ac1de57;
 }

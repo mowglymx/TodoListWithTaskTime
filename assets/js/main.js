@@ -13,8 +13,10 @@ if( typeof window === 'object' ){
             
             /// Declare the Name
             let nameReady = document.querySelector('#name-ready')
+            
             /// Hide the Name
             nameReady.style.display = 'none'
+
 
             /// Hide Name input when name is declared
             let editName = document.querySelector('#edit-name')
@@ -24,7 +26,7 @@ if( typeof window === 'object' ){
                 nameReady.style.display = 'none'
             })
 
-            /// Input de error
+            /// ERROR INPUT
             let error_nombre = document.querySelector('#error_nombre')
 
             error_nombre.style.display='none'
@@ -38,7 +40,7 @@ if( typeof window === 'object' ){
                 return false;
             }
 
-            /// Validamos el campo nombre
+            /// VALIDATE NAME INPUT
             nombre.addEventListener('input', (e)=>{
                 let validaNombre = checkName( e.target.value )
                 console.log(e.target.value)
@@ -51,11 +53,11 @@ if( typeof window === 'object' ){
                 }
             })
 
-            /// INICIO DEL ENVIO
+            /// SEND EVENT
             formulario.addEventListener('submit', function(e){
 
                 e.preventDefault()
-                // guardamos datos que ingresamos en los input
+                /// SAVE INPUT DATA
                 let nombre = document.querySelector('#nombre').value
 
                 if( nombre ){
@@ -71,9 +73,10 @@ if( typeof window === 'object' ){
                 }
                 
             })
-            /// CIERR DEL ENVIO DEL FORM
 
-        /// DEFINE TASK PRIORITIES ////////////////////////////////////////////
+
+
+        /// DEFINE TASK PRIORITIES ///////////////////////////////////////////////////////////////
 
             const priorityCheck = () => {
                 let priorityNumber = 50;
@@ -102,7 +105,7 @@ if( typeof window === 'object' ){
 }
 
 
-/// MOOD PICKER ////////////////////////////////////////////
+/// MOOD PICKER //////////////////////////////////////////////////////////////////////////////////
 
 function moodPick() {
     let moodPickValue = document.querySelector('#mood-select').value;
@@ -120,7 +123,7 @@ function moodPick() {
 }
 
 
-/// SET TASK PRIORITY /////////////////////////////////////////////////////////////////////////
+/// SET TASK PRIORITY ////////////////////////////////////////////////////////////////////////////
     function setTaskPriority() {
 
         tasksingleOne = document.querySelectorAll('.task-single  .item-priority > input[type="radio"]')
@@ -133,7 +136,6 @@ function moodPick() {
 
                 let radioItemValue = event.target.value;
 
-                let itemPriorityWrapper = document.querySelector('.task-single .item-priority');
                 let itemPriority = document.querySelector('.task-single .item-priority');
                 itemPriority.closest('.task-single');
 
@@ -144,7 +146,8 @@ function moodPick() {
                 setColour = "task-single card mb-3 selected"
                 this.closest('.task-single').className = setColour
                 localStorage.setItem("background", setColour);
-                
+
+                //this.checked = true;
             }
 
             // Store Priority Set
@@ -172,7 +175,7 @@ function moodPick() {
 
                 singleTaskGet.setAttribute('id', 'task-single-'+index)
 
-                setTaskPriority();
+                
 
             },500)
 
@@ -180,8 +183,10 @@ function moodPick() {
         
     }
 
+    setTaskPriority();
 
-/// ADD TASKS TO LOCAL STORAGE ////////////////////////////////////////////
+
+/// ADD TASKS TO LOCAL STORAGE //////////////////////////////////////////////////////////////////
     if( typeof window === 'object' ){ 
 
         /// DOM IS LOADED: DOMContentLoaded
