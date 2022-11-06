@@ -225,7 +225,7 @@ function moodPick() {
                     taskSingle.innerHTML = `
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-7 task-single-name">
+                                <div class="col-md-12 task-single-name">
                                     <div class="input-group">
                                         <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
                                         <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
@@ -241,34 +241,6 @@ function moodPick() {
                                         <label class="btn btn-sm btn-danger" for="radio-high-priority-${[i]}">High Priority</label>
                                     </div>
                                 </div>
-                                <div class="col-md-5 item-timelapse">
-                                    <div class="card m-0 p-0">
-                                        <div class="card-body m-0 p-2">
-                                            <div class="row align-items-end">
-                                                <div class="col-md-4">
-                                                    <label for="fromTime"><small>From:</small></label>
-                                                    <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="toTime"><small>To:</small></label>
-                                                    <input class="form-control toTime" type="time" name="toTime" value="14:30">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <button class="btn btn-secondary item-get-time">Get Total Time</button>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-md-8">
-                                                    <div class="item-sum-time">00:00</div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
-                                                </div>
-                                            </div><!-- /row -->
-                                        </div>
-                                    </div><!-- /card -->
-                                </div><!-- /col-md-6 -->
                             </div><!-- /row -->
                         </div><!-- /card-body -->
                     `
@@ -302,32 +274,34 @@ function moodPick() {
         })
     }
 
-    const getTaksNameEmotion = ( taskEmotion ) => {
-        if( taskEmotion !== undefined ){
-            taskEmotion.forEach(( element ) => {
-                const { emotion } = element
-                const getTaskName = document.querySelector('.task-single .item-add-input').value;
-                console.log('task emotion', taskEmotion)
-            })
-        }
-    }
+  
     
-    const getTaskName = 'i hate this name';
-    const options = {
-        
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            Accept: 'application/json',
-            'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
-            'X-RapidAPI-Host': 'ekman-emotion-analysis.p.rapidapi.com'
-        },
-        body: `[{"id":"1","language":"en","text":"${getTaskName}"}]`
-    };
-    
-    fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
 
-        console.log(options)
+    if( typeof window === 'object'){
+
+        window.addEventListener('DOMContentLoaded', () => {
+    
+            let getTaskName = document.querySelector('.item-add-input').value;
+            console.log(getTaskName)
+            let taskNameToString = getTaskName.toString()
+
+            const options = {
+                
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    Accept: 'application/json',
+                    'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
+                    'X-RapidAPI-Host': 'ekman-emotion-analysis.p.rapidapi.com'
+                },
+                body: `[{"id":"1","language":"en","text":"${taskNameToString}"}]`
+            };
+            
+            fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options)
+                .then(response => response.json())
+                .then(response => console.log('task name emotion is: ', response[0].predictions[0].prediction))
+                .catch(err => console.error(err));
+
+                console.log(options)
+        })
+    }
