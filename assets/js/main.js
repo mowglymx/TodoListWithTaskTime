@@ -271,24 +271,23 @@ function moodPick() {
 
     
 
+
     if( typeof window === 'object'){
 
         window.addEventListener('DOMContentLoaded', () => {
-    
+
             let getTaskName = document.querySelector('.item-add-input').value;
-            console.log(getTaskName)
             let taskNameToString = getTaskName.toString()
+            console.log('Task name String:', taskNameToString)
 
             const options = {
-                
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
-                    Accept: 'application/json',
                     'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
-                    'X-RapidAPI-Host': 'ekman-emotion-analysis.p.rapidapi.com'
+                    'X-RapidAPI-Host': 'emodex-emotions-analysis.p.rapidapi.com'
                 },
-                body: `[{"id":"1","language":"en","text":"${taskNameToString}"}]`
+                body: `{"sentence":"${taskNameToString}"}`
             };
             
             /// DEFINE VARIABLE TO STORE FETCH DATA
@@ -296,23 +295,42 @@ function moodPick() {
 
             /// FETCH URL & GET DATA
             const getData = async () => {
-                const response = await fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options);
+                const response = await fetch('https://emodex-emotions-analysis.p.rapidapi.com/rapidapi/emotions', options)
                 const data = await response.json();
-                dataGlobal = data[0].predictions[0].prediction;
+                dataGlobal = data;
                 return data;
             };
             
             /// ASYNC & AWAIT, THEN PASS DATA TO VARIABLE
             (async () => {
                 await getData();
-                let getTaskEmotion = dataGlobal.toString()
+                
+                let dataArray = dataGlobal.sentence
+                const dataArrayValues = Object.values(dataArray);
+                const dataArrayKeys = Object.keys(dataArray);
+                const dataArrayValuesSplice = dataArrayValues.splice(-1);
+                const dataArrayValueText = dataArrayValuesSplice.reverse()
+                const dataArrayValuesMax = Math.max(...dataArrayValues)
+
+                const indexOfHighestValue = dataArrayValues.indexOf(dataArrayValuesMax);
+                const wordOfHighestValue = Object.keys(dataArray)[indexOfHighestValue];
+
+                
+                console.log('initial data', dataArray)
+                console.log('data global', dataArrayValueText);
+                console.log('data global', dataArrayValues);
+                console.log('highest number', dataArrayValuesMax)
+                console.log('index of highest number', indexOfHighestValue);
+                console.log('word', wordOfHighestValue)
+
+                let getTaskEmotion = wordOfHighestValue.toString()
                 let taskEmotion = document.querySelector('.task-single')
 
                 taskEmotion.classList.add(getTaskEmotion)
+
                 
-                console.log('data global',dataGlobal);
             })();
 
-            
+
         })
     }
