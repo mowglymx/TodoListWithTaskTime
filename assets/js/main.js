@@ -246,7 +246,7 @@ function moodPick() {
 
             }
 
-            /// DELETE TASK
+            /// DELETE TASK FROM LOCALSTORAGE AND FROM THE DOM
             removeTaskButton = document.querySelectorAll('.task-single-delete')
 
             for (let i = 0; i < removeTaskButton.length; i++) {
@@ -264,7 +264,6 @@ function moodPick() {
         })
     }
 
-  
     
 
     if( typeof window === 'object'){
@@ -287,11 +286,28 @@ function moodPick() {
                 body: `[{"id":"1","language":"en","text":"${taskNameToString}"}]`
             };
             
-            fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options)
-                .then(response => response.json())
-                .then(response => console.log('task name emotion is: ', response[0].predictions[0].prediction))
-                .catch(err => console.error(err));
+            /// DEFINE VARIABLE TO STORE FETCH DATA
+            let dataGlobal;
 
-                console.log(options)
+            /// FETCH URL & GET DATA
+            const getData = async () => {
+                const response = await fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options);
+                const data = await response.json();
+                dataGlobal = data[0].predictions[0].prediction;
+                return data;
+            };
+            
+            /// ASYNC & AWAIT, THEN PASS DATA TO VARIABLE
+            (async () => {
+                await getData();
+                let getTaskEmotion = dataGlobal.toString()
+                let taskEmotion = document.querySelector('.task-single')
+
+                taskEmotion.classList.add(getTaskEmotion)
+                
+                console.log('data global',dataGlobal);
+            })();
+
+            
         })
     }

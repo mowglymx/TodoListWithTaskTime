@@ -56,3 +56,6 @@ body.neutral #user-preferences{
 .btn-check:checked+.btn{
     opacity: 1;
 }
+#form-add-task button{
+    width: 100%;;
+}
