@@ -73,71 +73,9 @@ if( typeof window === 'object' ){
             })
             /// CIERR DEL ENVIO DEL FORM
 
-
-        /**********************************************************
-        02 CONTROL DE FLUJOS 
-        **********************************************************/
-
-        // console.log('CONTROL DE FLUJOS ------->');
-
-            // Test if user name is not empty, and length of the name
-                /* if (userName === ""){
-                    alert("You need to give your name");
-                    // return false;
-                }else if ( userName.length > 15 ){
-                    alert("Your name is too long, try a shorter one");
-                    // return false;
-                }else if ( userName.length < 3 ){
-                    alert("Your name is too short, try a longer one");
-                    // return false;
-                }else if ( !( /^[a-zA-Z]+$/.test(userName) ) ){
-                    alert("You only need to provide letters");
-                    // return false;
-                } */
-
-
-            // Detect if the string first letter begins with M
-                /* let userNameFirstLetter = nombre.charAt(0);
-
-                console.log(`${userNameFirstLetter}`);
-
-                if ( userNameFirstLetter.toUpperCase() === 'M' ){
-                    console.log('Your name starts with M')
-                } */
-
-            // Test year of Todos 
-                let currentYear = 2022;
-
-                if(currentYear <= 2021){
-                    console.log('These todos are from the past!');
-                }else{
-                    console.log('These todos are from the ' + currentYear)
-                }
-
-
-
-        /**********************************************************
-        03 CICLOS E ITERACIONES
-        **********************************************************/
-
-        console.log('CICLOS E ITERACIONES ------->');
-
-            // Years since you started your My Todo
-                let startYear = 2020;
-
-                for(var e = startYear; e <= currentYear;  e++ ){
-                    console.log(`Years since ${startYear}: `+e);
-                    //debugger;
-                }
-
-                do{
-                    console.log(startYear);
-                    startYear--;
-                }while(startYear > 2020)
-
-
         /// DEFINE TASK PRIORITIES ////////////////////////////////////////////
 
+            const priorityCheck = () => {
                 let priorityNumber = 50;
                 let priorityPrint;
 
@@ -158,49 +96,10 @@ if( typeof window === 'object' ){
                     default:
                     priorityPrint = 'Your todo does not has priority set';
                 }
-
-                console.log(priorityPrint);
-
-        
-        /**********************************************************
-        04 FUNCIONES
-        **********************************************************/
-
-        
-
-
-        /**********************************************************
-        05 OBJETOS
-        **********************************************************/
-
-        console.log('OBJETOS ------->');
-
-        function Task( name, priority ){
-
-            this.name = name
-            this.priority = priority
-
-            // METODO
-            this.showTask = function(){
-                console.log(`Task Name: ${name} & Priority ${priority}`)
             }
-        }
-
-            let task1 = new Task('Task X', 'Medium Priority')
-
-            console.log(task1);
-            task1.showTask();
-
-        let body = document.querySelector('#body');
-
-
-       
-
-
 
     })
 }
-
 
 
 /// MOOD PICKER ////////////////////////////////////////////
@@ -221,195 +120,214 @@ function moodPick() {
 }
 
 
-/// ADD TASKS ////////////////////////////////////////////
+/// SET TASK PRIORITY /////////////////////////////////////////////////////////////////////////
+    function setTaskPriority() {
 
-if( typeof window === 'object' ){ 
-
-    /// DOM IS LOADED: DOMContentLoaded
-    window.addEventListener('DOMContentLoaded', () => {
-
-        let addTask = document.querySelector('#form-add-task');
-
-        addTask.addEventListener('submit', ( event ) => {
-            
-            /// Prevent the form to reload
-            event.preventDefault();
-
-            let newTaskName = document.querySelector('#add-task').value;
-    
-            /// Validate if the input is empty
-            if ( newTaskName.length >= 1 ) {
-                /// Add the Task Name to LocalStorage
-                localStorage.setItem( newTaskName, newTaskName);
-                location.reload();
-            }else{
-                alert('You need to write the new task name')
-            }
-        });
-    
-        let taskList = document.querySelector('#task-list');
-
-        /// Go through all the LocalStorage with a for in
-        for( let i in localStorage ){
-            let key = localStorage.key(i);
-
-            if( typeof localStorage[i] == 'string'){
-                let taskSingle = document.createElement('article');
-
-                taskSingle.classList.add('task-single', 'card', 'mb-3');
-                taskSingle.innerHTML = `
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7 task-single-name">
-                                <div class="input-group">
-                                    <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
-                                    <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
-                                </div>
-                                <div class="item-priority mt-4">
-                                    <input type="radio" id="radio-low-priority-${[i]}" class="btn-check btn-success" name="priority-${[i]}" autocomplete="off" value="0">
-                                    <label class="btn btn-sm btn-success" for="radio-low-priority-${[i]}">Low Priority</label>
-                                    
-                                    <input type="radio" id="radio-medium-priority-${[i]}" class="btn-check btn-warning" name="priority-${[i]}" autocomplete="off" value="50">
-                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority-${[i]}">Medium Priority</label>
-
-                                    <input type="radio" id="radio-high-priority-${[i]}" class="btn-check btn-danger" name="priority-${[i]}" autocomplete="off" value="100">
-                                    <label class="btn btn-sm btn-danger" for="radio-high-priority-${[i]}">High Priority</label>
-                                </div>
-                            </div>
-                            <div class="col-md-5 item-timelapse">
-                                <div class="card m-0 p-0">
-                                    <div class="card-body m-0 p-2">
-                                        <div class="row align-items-end">
-                                            <div class="col-md-4">
-                                                <label for="fromTime"><small>From:</small></label>
-                                                <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="toTime"><small>To:</small></label>
-                                                <input class="form-control toTime" type="time" name="toTime" value="14:30">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button class="btn btn-secondary item-get-time">Get Total Time</button>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="item-sum-time">00:00</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
-                                            </div>
-                                        </div><!-- /row -->
-                                    </div>
-                                </div><!-- /card -->
-                            </div><!-- /col-md-6 -->
-                        </div><!-- /row -->
-                    </div><!-- /card-body -->
-                `
-                taskList.append(taskSingle);
-            }
-
-        }
+        tasksingleOne = document.querySelectorAll('.task-single  .item-priority > input[type="radio"]')
 
         
 
-        /// Proceso Asincrónico // Async
-        /// Add Unique Radio Button Group name
-            function taskSingleID() {
-                //get the images
-                let singleTaskGet = document.querySelectorAll('.task-single');
+        for (let i = 0; i < tasksingleOne.length; i++) {
 
-                singleTaskGet.forEach(function (singleTaskGet, index) {
+            tasksingleOne[i].onclick = function( event ) {
+                
+                console.log('clicking radio button', this)
 
-                    setTimeout( function onTimer(){
+                let radioItemValue = event.target.value;
 
-                        singleTaskGet.setAttribute('id', 'task-single-'+index)
-                        
-                    },2000)
-    
-                });
+                let itemPriorityWrapper = document.querySelector('.task-single .item-priority');
+                let itemPriority = document.querySelector('.task-single .item-priority');
+                itemPriority.closest('.task-single');
+
+                this.closest('.task-single').className = 'task-single card mb-3';
+                this.closest('.task-single').classList.add('selected');
+                this.closest('.task-single').classList.add(radioItemValue);
+
+                setColour = "task-single card mb-3 selected"
+                this.closest('.task-single').className = setColour
+                localStorage.setItem("background", setColour);
                 
             }
-            
-            taskSingleID();
 
-
-
-        /// Delete Task
-    
-        let removeTask = document.querySelector('.task-single-delete');
-    
-        removeTask.addEventListener('click', ( event ) => {
-
-            console.log('Delete a task is working!')
-            
-            /// Select the input with the name of task, inside the task-single div
-            let newTaskName = document.querySelector('.task-single .item-add-input').value;
-    
-            /// Validate if the input is empty
-            if ( newTaskName.length >= 1 ) {
-                localStorage.removeItem(newTaskName);
-                location.reload();
+            // Store Priority Set
+            if (localStorage.getItem("background") != null) {
+                getColour = localStorage.background;
+                document.querySelector('.task-single').className = getColour;
             }
+
+        }
+        
+    }
+
+
+
+
+
+/// ASYNC PROCESS: UPDATE RADIO BUTTONS GROUP ON EACH TASK ///////////////////////////////////////
+    function taskSingleID() {
+        
+        let singleTaskGet = document.querySelectorAll('.task-single');
+
+        console.log('Total number of tasks:', singleTaskGet.length)
+
+        singleTaskGet.forEach(function (singleTaskGet, index) {
+
+            setTimeout( function onTimer(){
+
+                singleTaskGet.setAttribute('id', 'task-single-'+index)
+
+                setTaskPriority();
+
+            },500)
+
         });
+        
+    }
 
-    })
-}
 
-
-/// ADD TASK TIME ////////////////////////////////////////////
-
+/// ADD TASKS TO LOCAL STORAGE ////////////////////////////////////////////
     if( typeof window === 'object' ){ 
 
         /// DOM IS LOADED: DOMContentLoaded
         window.addEventListener('DOMContentLoaded', () => {
+            
 
-        /// Calculate time to complete a task                
-            var sum = document.querySelector(".item-sum-time");
-            var reset = document.querySelector(".item-reset-time");
+            let addTask = document.querySelector('#form-add-task');
 
-            function getTotalMinutesEachTask() {
-                let fromTime = document.querySelector('.fromTime').value;
-                let toTime = document.querySelector('.toTime').value;
-
-                let [fromHours, fromMinutes] = fromTime.split(':');
-                let [toHours, toMinutes] = toTime.split(':');
+            addTask.addEventListener('submit', ( event ) => {
                 
-                // Total minutes worked is calculated by getting the difference in hours x 60 and adding the difference in minutes.
-                return (toHours - fromHours) * 60 + (toMinutes - fromMinutes);
-            }
+                /// Prevent the form to reload on click submit
+                event.preventDefault();
 
-            function convertTime() {
-                let totalMinutes = getTotalMinutesEachTask();
-
-                if (totalMinutes < 0) {
-                    sum.innerHTML = "The To time should be later than From time"
-                    return;
+                let newTaskName = document.querySelector('#add-task').value;
+        
+                /// Validate if the input is empty
+                if ( newTaskName.length >= 1 ) {
+                    /// Add the Task Name to LocalStorage
+                    localStorage.setItem( newTaskName, newTaskName);
+                    location.reload();
+                }else{
+                    alert('You need to write the new task name')
                 }
-
-                sum.innerHTML = "You Worked " + minutesToHoursAndMinutes(totalMinutes) + " hours";
-                reset.style.opacity = 1;
-            }
-
-            function minutesToHoursAndMinutes(minutes) {
-                let hours = Math.floor(minutes / 60);
-                let mins = (minutes % 60);
-                return (hours + '').padStart(2, '0') + ':' + (mins + '').padStart(2, '0')
-            }
-
-            document.querySelectorAll('.item-get-time').forEach(getTimeButton => {
-                getTimeButton.addEventListener('click', function (e) {
-                    e.stopPropagation();
-
-                    console.log('Get time button clicked')
-
-                    convertTime();
-                });
-            });              
-
+            });
 
             
-            reset.onclick = (e)=> sum.innerHTML = "00:00"
+            let taskList = document.querySelector('#task-list');
+
+            /// Go through all the LocalStorage with a for in
+            for( let i in localStorage ){
+                let key = localStorage.key(i);
+
+                if( typeof localStorage[i] == 'string'){
+                    let taskSingle = document.createElement('article');
+
+                    taskSingle.classList.add('task-single', 'card', 'mb-3');
+                    taskSingle.innerHTML = `
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7 task-single-name">
+                                    <div class="input-group">
+                                        <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
+                                        <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
+                                    </div>
+                                    <div class="item-priority mt-4">
+                                        <input type="radio" id="radio-low-priority-${[i]}" class="btn-check btn-success" name="priority-${[i]}" autocomplete="off" value="0">
+                                        <label class="btn btn-sm btn-success" for="radio-low-priority-${[i]}">Low Priority</label>
+                                        
+                                        <input type="radio" id="radio-medium-priority-${[i]}" class="btn-check btn-warning" name="priority-${[i]}" autocomplete="off" value="50">
+                                        <label class="btn btn-sm btn-warning" for="radio-medium-priority-${[i]}">Medium Priority</label>
+
+                                        <input type="radio" id="radio-high-priority-${[i]}" class="btn-check btn-danger" name="priority-${[i]}" autocomplete="off" value="100">
+                                        <label class="btn btn-sm btn-danger" for="radio-high-priority-${[i]}">High Priority</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 item-timelapse">
+                                    <div class="card m-0 p-0">
+                                        <div class="card-body m-0 p-2">
+                                            <div class="row align-items-end">
+                                                <div class="col-md-4">
+                                                    <label for="fromTime"><small>From:</small></label>
+                                                    <input class="form-control fromTime" type="time" name="fromTime" value="13:30">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="toTime"><small>To:</small></label>
+                                                    <input class="form-control toTime" type="time" name="toTime" value="14:30">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-secondary item-get-time">Get Total Time</button>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="item-sum-time">00:00</div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button class="btn btn-sm btn-secondary item-reset-time">Reset</button>
+                                                </div>
+                                            </div><!-- /row -->
+                                        </div>
+                                    </div><!-- /card -->
+                                </div><!-- /col-md-6 -->
+                            </div><!-- /row -->
+                        </div><!-- /card-body -->
+                    `
+                    taskList.append(taskSingle);
+                    taskSingleID();
+                    deleteTask();
+                }
+
+            }
+            
+
+            /// DELETE TASK
+            function deleteTask() {
+                let removeTask = document.querySelector('.task-single-delete');
+            
+                removeTask.addEventListener('click', ( event ) => {
+
+                    console.log('Delete a task is working!')
+                    
+                    /// Select the input with the name of task, inside the task-single div
+                    let newTaskName = document.querySelector('.task-single .item-add-input').value;
+            
+                    /// Validate if the input is empty
+                    if ( newTaskName.length >= 1 ) {
+                        localStorage.removeItem(newTaskName);
+                        location.reload();
+                    }
+                });
+            }
+
         })
     }
+
+    const getTaksNameEmotion = ( taskEmotion ) => {
+        if( taskEmotion !== undefined ){
+            taskEmotion.forEach(( element ) => {
+                const { emotion } = element
+                const getTaskName = document.querySelector('.task-single .item-add-input').value;
+                console.log('task emotion', taskEmotion)
+            })
+        }
+    }
+    
+    const getTaskName = 'i hate this name';
+    const options = {
+        
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            Accept: 'application/json',
+            'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
+            'X-RapidAPI-Host': 'ekman-emotion-analysis.p.rapidapi.com'
+        },
+        body: `[{"id":"1","language":"en","text":"${getTaskName}"}]`
+    };
+    
+    fetch('https://ekman-emotion-analysis.p.rapidapi.com/ekman-emotion', options)
+        .then(response => response.json())
+        .then(response => console.log(response))
+        .catch(err => console.error(err));
+
+        console.log(options)
