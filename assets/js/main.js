@@ -125,8 +125,6 @@ function moodPick() {
 
         tasksingleOne = document.querySelectorAll('.task-single  .item-priority > input[type="radio"]')
 
-        
-
         for (let i = 0; i < tasksingleOne.length; i++) {
 
             tasksingleOne[i].onclick = function( event ) {
@@ -158,8 +156,6 @@ function moodPick() {
         }
         
     }
-
-
 
 
 
@@ -214,9 +210,8 @@ function moodPick() {
             
             let taskList = document.querySelector('#task-list');
 
-            /// Go through all the LocalStorage with a for in
+            /// GO THROUGH ALL THE LOCALSTORAGE IWTH A FOR IN
             for( let i in localStorage ){
-                let key = localStorage.key(i);
 
                 if( typeof localStorage[i] == 'string'){
                     let taskSingle = document.createElement('article');
@@ -246,29 +241,24 @@ function moodPick() {
                     `
                     taskList.append(taskSingle);
                     taskSingleID();
-                    deleteTask();
+                    
                 }
 
             }
-            
 
             /// DELETE TASK
-            function deleteTask() {
-                let removeTask = document.querySelector('.task-single-delete');
-            
-                removeTask.addEventListener('click', ( event ) => {
+            removeTaskButton = document.querySelectorAll('.task-single-delete')
 
-                    console.log('Delete a task is working!')
+            for (let i = 0; i < removeTaskButton.length; i++) {
+
+                removeTaskButton[i].onclick = function( event ) {
                     
-                    /// Select the input with the name of task, inside the task-single div
-                    let newTaskName = document.querySelector('.task-single .item-add-input').value;
-            
-                    /// Validate if the input is empty
-                    if ( newTaskName.length >= 1 ) {
-                        localStorage.removeItem(newTaskName);
-                        location.reload();
-                    }
-                });
+                    console.log('deleting task', this)
+
+                    this.closest('.task-single').remove();
+                    
+                }
+
             }
 
         })
