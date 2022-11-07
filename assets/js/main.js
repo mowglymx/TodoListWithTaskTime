@@ -13,11 +13,24 @@ if( typeof window === 'object' ){
             
             /// Declare the Name
             let nameReady = document.querySelector('#name-ready')
-            
-            /// Hide the Name
-            nameReady.style.display = 'none'
 
+            if (localStorage.getItem('username') != null) {
+                formulario.style.display = 'none'
+                nameReady.style.display = 'block'
 
+                
+                let infoNombre = document.querySelector('#infoNombre')
+                let storageName = localStorage.getItem('username')
+                
+                infoNombre.innerHTML = `${storageName}`
+                
+
+            } else {
+                /// Hide the Name
+                formulario.style.display = 'block'
+                nameReady.style.display = 'none'
+            }
+        
             /// Hide Name input when name is declared
             let editName = document.querySelector('#edit-name')
 
@@ -68,6 +81,8 @@ if( typeof window === 'object' ){
                         nameReady.style.display = 'block'
                         formulario.style.display = 'none'
 
+                        localStorage.setItem('username', `${nombre}`);
+                        
                 } else {
                     alert('Debe llenar los campos')
                 }
@@ -143,15 +158,15 @@ function moodPick() {
                 this.closest('.task-single').classList.add('selected');
                 this.closest('.task-single').classList.add(radioItemValue);
 
-                setColour = "task-single card mb-3 selected"
+                setColour = 'task-single card mb-3 selected'
                 this.closest('.task-single').className = setColour
-                localStorage.setItem("background", setColour);
+                localStorage.setItem('background', setColour);
 
                 //this.checked = true;
             }
 
             // Store Priority Set
-            if (localStorage.getItem("background") != null) {
+            if (localStorage.getItem('background') != null) {
                 getColour = localStorage.background;
                 document.querySelector('.task-single').className = getColour;
             }
@@ -205,7 +220,7 @@ function moodPick() {
                 /// Validate if the input is empty
                 if ( newTaskName.length >= 1 ) {
                     /// Add the Task Name to LocalStorage
-                    localStorage.setItem( newTaskName, newTaskName);
+                    localStorage.setItem( 'TaskName', newTaskName);
                     location.reload();
                 }else{
                     alert('You need to write the new task name')
@@ -227,7 +242,7 @@ function moodPick() {
                             <div class="row">
                                 <div class="col-md-12 task-single-name">
                                     <div class="input-group">
-                                        <input class="form-control item-add-input" type="text" value="${localStorage[i]}">
+                                        <input class="form-control item-add-input" type="text" value="${localStorage[i]}" disabled>
                                         <span class="input-group-text task-single-delete"><i class="fa-solid fa-trash-can"></i> Delete</span>
                                     </div>
                                     <div class="item-priority mt-4">
@@ -269,68 +284,78 @@ function moodPick() {
         })
     }
 
-    
 
-
+/// FETCH, ASYNC AND AWAIT //////////////////////////////////////////////////////////////////////
     if( typeof window === 'object'){
 
         window.addEventListener('DOMContentLoaded', () => {
 
-            let getTaskName = document.querySelector('.item-add-input').value;
-            let taskNameToString = getTaskName.toString()
-            console.log('Task name String:', taskNameToString)
+            const taskSingle = document.querySelectorAll('.task-single');
 
-            const options = {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                    'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
-                    'X-RapidAPI-Host': 'emodex-emotions-analysis.p.rapidapi.com'
-                },
-                body: `{"sentence":"${taskNameToString}"}`
-            };
+            taskSingle.forEach(function(el) {
+
+                let getTaskName = el.querySelector('.item-add-input').value;
+                let taskNameToString = getTaskName.toString()
+
+                /// OPTIONS
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                        'X-RapidAPI-Key': '35c63d6ea2msha05f90ff47e9c5bp1ba794jsn258349b87bb8',
+                        'X-RapidAPI-Host': 'emodex-emotions-analysis.p.rapidapi.com'
+                    },
+                    body: `{"sentence":"${taskNameToString}"}`
+                };
+                
+                /// DEFINE VARIABLE TO STORE FETCH DATA
+                let dataGlobal;
+    
+                /// FETCH URL & GET DATA
+                const getData = async () => {
+                    const response = await fetch('https://emodex-emotions-analysis.p.rapidapi.com/rapidapi/emotions', options)
+                    const data = await response.json();
+                    dataGlobal = data;
+                    return data;
+                };
+                
+                /// ASYNC & AWAIT, THEN PASS DATA TO VARIABLE
+                async function showData() {
+                    await getData();
+                    
+                    let dataArray = dataGlobal.sentence
+                    const dataArrayValues = Object.values(dataArray);
+                    const dataArrayKeys = Object.keys(dataArray);
+                    const dataArrayValuesSplice = dataArrayValues.splice(-1);
+                    const dataArrayValueText = dataArrayValuesSplice.reverse()
+                    const dataArrayValuesMax = Math.max(...dataArrayValues)
+    
+                    const indexOfHighestValue = dataArrayValues.indexOf(dataArrayValuesMax);
+                    const wordOfHighestValue = Object.keys(dataArray)[indexOfHighestValue];
+    
+                    const tasks = await document.querySelectorAll('.task-single');
+                    await tasks.forEach(async (el, i) => {
+                        tasks[i].classList.add(wordOfHighestValue);
+                        console.log('tasks',tasks[i])
+                        
+                    });
+
+                    console.log('initial data', dataArray)
+                    console.log('data global text', dataArrayValueText);
+                    console.log('data global', dataArrayValues);
+                    console.log('highest number', dataArrayValuesMax)
+                    console.log('index of highest number', indexOfHighestValue);
+                    console.log('word', wordOfHighestValue)
+                    
+                    return
+                }
+
+
+                showData()
+                
+            });
+
             
-            /// DEFINE VARIABLE TO STORE FETCH DATA
-            let dataGlobal;
-
-            /// FETCH URL & GET DATA
-            const getData = async () => {
-                const response = await fetch('https://emodex-emotions-analysis.p.rapidapi.com/rapidapi/emotions', options)
-                const data = await response.json();
-                dataGlobal = data;
-                return data;
-            };
-            
-            /// ASYNC & AWAIT, THEN PASS DATA TO VARIABLE
-            (async () => {
-                await getData();
-                
-                let dataArray = dataGlobal.sentence
-                const dataArrayValues = Object.values(dataArray);
-                const dataArrayKeys = Object.keys(dataArray);
-                const dataArrayValuesSplice = dataArrayValues.splice(-1);
-                const dataArrayValueText = dataArrayValuesSplice.reverse()
-                const dataArrayValuesMax = Math.max(...dataArrayValues)
-
-                const indexOfHighestValue = dataArrayValues.indexOf(dataArrayValuesMax);
-                const wordOfHighestValue = Object.keys(dataArray)[indexOfHighestValue];
-
-                
-                console.log('initial data', dataArray)
-                console.log('data global', dataArrayValueText);
-                console.log('data global', dataArrayValues);
-                console.log('highest number', dataArrayValuesMax)
-                console.log('index of highest number', indexOfHighestValue);
-                console.log('word', wordOfHighestValue)
-
-                let getTaskEmotion = wordOfHighestValue.toString()
-                let taskEmotion = document.querySelector('.task-single')
-
-                taskEmotion.classList.add(getTaskEmotion)
-
-                
-            })();
-
 
         })
     }
