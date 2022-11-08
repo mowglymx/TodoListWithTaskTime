@@ -17,54 +17,36 @@
 <body id="body">
     <section id="page-title" class="container">
         <div class="row align-items-center justify-content-end">
-            <div class="col-md-8">
+            <div class="col-md-5">
                 <h1>Emotional Todo</h1>
             </div>
-            <div class="col-md-4 text-end">
-                
+            <div class="col-md-7 text-end">
+                <section id="user-preferences" class="container">
+        
+                    <div id="user-data">
+            
+                        <form action="" method="POST" class="card" id="user-data-form" onsubmit="return false;">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="nombre" placeholder="Write your name">
+                                <input type="submit" value="Set Your Name" id="submit" class="btn btn-secondary">
+                            </div>
+                        </form>
+                        <div class="alert alert-danger my-2" role="alert" id="error_nombre">
+                        </div>
+                        <div id="name-ready" class="">
+                            <span class="font-weight-bold d-flex align-items-end justify-content-end">
+                                <strong>Name: </strong> <span class="font-weight-light" id="infoNombre"></span> <span id="edit-name"><i class="fa-solid fa-pen-to-square"></i></span>
+                            </span>
+                        </div>
+                    
+                    </div><!-- /user-data -->
+            
+                </section><!-- /user-preferences /container -->
             </div>
         </div>
     </section>
 
-    <section id="user-preferences" class="container">
-        
-        <div id="user-data" class="row">
-
-            <div class="col-md-4">
-                <form action="" method="POST" class="card" id="user-data-form" onsubmit="return false;">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="nombre" placeholder="Write your name">
-                        <input type="submit" value="Submit" id="submit" class="btn btn-secondary">
-                    </div>
-                </form>
-                <div class="alert alert-danger my-2" role="alert" id="error_nombre">
-                </div>
-                <div id="name-ready" class="">
-                    <span class="font-weight-bold d-flex align-items-center">
-                        <strong>Name: </strong> <span class="font-weight-light" id="infoNombre"></span> <span id="edit-name"><i class="fa-solid fa-pen-to-square"></i></span>
-                    </span>
-                </div>
-            </div>
-            
-            <div id="user-mood" class="col-md-8">
-                <div class="row row-vcenter justify-content-end">
-                    
-                    <div class="col-sm-1">
-                        <div id="mood-title" class="text-end col-form-label">Mood:</div>
-                    </div>
-                    <div class="col-sm-3">
-                        <select name="mood-select" id="mood-select" class="form-select" onchange="moodPick()">
-                            <option value="happy">Happy</option>
-                            <option value="neutral">Neutral</option>
-                            <option value="sad">Not the best day</option>
-                        </select>
-                    </div>
-                </div><!-- /row-->        
-            </div>
-        
-        </div><!-- /row -->
-
-    </section><!-- /user-preferences /container -->
+    
 
     <section id="add-items" class="container my-4 p-0">
 
@@ -99,20 +81,26 @@
                             <input class="form-control item-add-input" type="text" value="i love this task name" disabled>
                             <span class="input-group-text task-single-delete"><svg class="svg-inline--fa fa-trash-can" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-can" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"></path></svg><!-- <i class="fa-solid fa-trash-can"></i> Font Awesome fontawesome.com --> Delete</span>
                         </div>
-                        <div class="item-priority mt-4">
-                            <input type="radio" id="radio-low-priority-i love this task name" class="btn-check btn-success" name="priority-i love this task name" autocomplete="off" value="0" checked>
-                            <label class="btn btn-sm btn-success" for="radio-low-priority-i love this task name">Low Priority</label>
-                            
-                            <input type="radio" id="radio-medium-priority-i love this task name" class="btn-check btn-warning" name="priority-i love this task name" autocomplete="off" value="50">
-                            <label class="btn btn-sm btn-warning" for="radio-medium-priority-i love this task name">Medium Priority</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="item-priority mt-4">
+                                    <input type="radio" id="radio-low-priority-i love this task name" class="btn-check btn-success" name="priority-i love this task name" autocomplete="off" value="0" checked>
+                                    <label class="btn btn-sm btn-success" for="radio-low-priority-i love this task name">Low Priority</label>
+                                    
+                                    <input type="radio" id="radio-medium-priority-i love this task name" class="btn-check btn-warning" name="priority-i love this task name" autocomplete="off" value="50">
+                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority-i love this task name">Medium Priority</label>
 
-                            <input type="radio" id="radio-high-priority-i love this task name" class="btn-check btn-danger" name="priority-i love this task name" autocomplete="off" value="100">
-                            <label class="btn btn-sm btn-danger" for="radio-high-priority-i love this task name">High Priority</label>
+                                    <input type="radio" id="radio-high-priority-i love this task name" class="btn-check btn-danger" name="priority-i love this task name" autocomplete="off" value="100">
+                                    <label class="btn btn-sm btn-danger" for="radio-high-priority-i love this task name">High Priority</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4"><span class="sentiment badge badge-secondary mt-5"><label>Sentiment:</label> <div class="taskSentiment"></div></span></div>
                         </div>
                     </div>
                 </div><!-- /row -->
             </div><!-- /card-body -->
         </article>
+        
         <article class="task-single card mb-3" id="task-single-00">
             <div class="card-body">
                 <div class="row">
@@ -121,15 +109,48 @@
                             <input class="form-control item-add-input" type="text" value="Cancel all meetings tomorrow" disabled>
                             <span class="input-group-text task-single-delete"><svg class="svg-inline--fa fa-trash-can" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-can" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"></path></svg><!-- <i class="fa-solid fa-trash-can"></i> Font Awesome fontawesome.com --> Delete</span>
                         </div>
-                        <div class="item-priority mt-4">
-                            <input type="radio" id="radio-low-priority-cancel all meetings" class="btn-check btn-success" name="priority-cancel all meetings" autocomplete="off" value="0" >
-                            <label class="btn btn-sm btn-success" for="radio-low-priority-cancel all meetings">Low Priority</label>
-                            
-                            <input type="radio" id="radio-medium-priority-cancel all meetings" class="btn-check btn-warning" name="priority-cancel all meetings" autocomplete="off" value="50" checked>
-                            <label class="btn btn-sm btn-warning" for="radio-medium-priority-cancel all meetings">Medium Priority</label>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="item-priority mt-4">
+                                    <input type="radio" id="radio-low-priority-cancel all meetings" class="btn-check btn-success" name="priority-cancel all meetings" autocomplete="off" value="0" >
+                                    <label class="btn btn-sm btn-success" for="radio-low-priority-cancel all meetings">Low Priority</label>
+                                    
+                                    <input type="radio" id="radio-medium-priority-cancel all meetings" class="btn-check btn-warning" name="priority-cancel all meetings" autocomplete="off" value="50" checked>
+                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority-cancel all meetings">Medium Priority</label>
 
-                            <input type="radio" id="radio-high-priority-cancel all meetings" class="btn-check btn-danger" name="priority-cancel all meetings" autocomplete="off" value="100">
-                            <label class="btn btn-sm btn-danger" for="radio-high-priority-cancel all meetings">High Priority</label>
+                                    <input type="radio" id="radio-high-priority-cancel all meetings" class="btn-check btn-danger" name="priority-cancel all meetings" autocomplete="off" value="100">
+                                    <label class="btn btn-sm btn-danger" for="radio-high-priority-cancel all meetings">High Priority</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4"><span class="sentiment badge badge-secondary mt-5"><label>Sentiment:</label> <div class="taskSentiment"></div></span></div>
+                        </div>
+                    </div>
+                </div><!-- /row -->
+            </div><!-- /card-body -->
+        </article>
+
+        <article class="task-single card mb-3" id="task-single-00">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 task-single-name">
+                        <div class="input-group">
+                            <input class="form-control item-add-input" type="text" value="Groceries New List" disabled>
+                            <span class="input-group-text task-single-delete"><svg class="svg-inline--fa fa-trash-can" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-can" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"></path></svg><!-- <i class="fa-solid fa-trash-can"></i> Font Awesome fontawesome.com --> Delete</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="item-priority mt-4">
+                                    <input type="radio" id="radio-low-priority-cancel all meetings" class="btn-check btn-success" name="priority-cancel all meetings" autocomplete="off" value="0" >
+                                    <label class="btn btn-sm btn-success" for="radio-low-priority-cancel all meetings">Low Priority</label>
+                                    
+                                    <input type="radio" id="radio-medium-priority-cancel all meetings" class="btn-check btn-warning" name="priority-cancel all meetings" autocomplete="off" value="50" checked>
+                                    <label class="btn btn-sm btn-warning" for="radio-medium-priority-cancel all meetings">Medium Priority</label>
+
+                                    <input type="radio" id="radio-high-priority-cancel all meetings" class="btn-check btn-danger" name="priority-cancel all meetings" autocomplete="off" value="100">
+                                    <label class="btn btn-sm btn-danger" for="radio-high-priority-cancel all meetings">High Priority</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4"><span class="sentiment badge badge-secondary mt-5"><label>Sentiment:</label> <div class="taskSentiment"></div></span></div>
                         </div>
                     </div>
                 </div><!-- /row -->

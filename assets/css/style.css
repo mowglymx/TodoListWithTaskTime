@@ -9,18 +9,18 @@
 
 */
 
-body #user-preferences, body.happy #user-preferences{
+body{
+    background-color: #f5f5f5 !important;
+}
+body #page-title{
+    margin: 0 auto 5px !important;
     padding: 10px;
-    background-color: #fc440f4d;
- }
-body.sad #user-preferences{
-    background-color: #F62DAE21;
+    background-color: transparent;
+    border-bottom: 2px solid #bdbdbd;
 }
-body.neutral #user-preferences{
-   background-color: #FC440F21;
+h1{
+    margin-bottom: 0 !important;
 }
-
-
 #user-data{
     align-items: center;
 }
@@ -50,9 +50,10 @@ body.neutral #user-preferences{
 .task-single.selected .item-priority{
     background-color: #f0f0f0;
 }
-.task-single.joy.selected .item-priority,
-.task-single.fear.selected .item-priority,
-.task-single.love.selected .item-priority{
+.task-single.POSITIVE.selected .item-priority,
+.task-single.NEGATIVE.selected .item-priority,
+.task-single.NEUTRAL.selected .item-priority,
+.task-single.MIXED.selected .item-priority{
     background-color: #ffffffcf;
 }
 .btn-check+.btn{
@@ -64,15 +65,47 @@ body.neutral #user-preferences{
 #form-add-task button{
     width: 100%;;
 }
-.task-single.joy{
+.task-single.POSITIVE{
     background-color: #3ade9224;
     border: 1px solid #3ade92;
 }
-.task-single.fear{
-    background-color: #3ac1de24;
-    border: 1px solid #3ac1de57;
-}
-.task-single.love{
+.task-single.NEGATIVE{
     background-color: #de3a3a24;
-    border: 1px solid #de3a3a4a;
+    border: 1px solid #de3a3a57;
+}
+.task-single.NEUTRAL{
+    background-color: #cdcdcd24;
+    border: 1px solid #cdcdcd6e;
+}
+.task-single.MIXED{
+    background-color: #bee1f55e;
+    border: 1px solid #bee1f5;
+}
+.badge.sentiment{
+    padding: 5px 10px;
+    display: inline-block;
+    justify-content: flex-end!important;
+    align-items: flex-end!important;
+    background-color: #21252996;
+}
+.badge.sentiment label{
+    display: inline-block;
+    font-weight: 400;;
+}
+.badge.sentiment .taskSentiment{
+    display: inline-block;
+    font-weight: 600;;
+}
+.task-single-name .row .col-md-4{
+    text-align: right;
+}
+#add-items .card,
+#add-items .card-header{
+    background-color: transparent !important;
+    border-color: #dadada;
+}
+#task-list{
+    padding: 10px 20px !important;
+    background-color: #fff;
+    border-radius: 8px !important;
 }
